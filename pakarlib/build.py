@@ -18,6 +18,12 @@ def get_cities():
             f.write(res.content)
 
 def get_segments():
+    URL = "https://dist.meser-hadash.org.il/smart-dist/services/anonymous/segments/android"
+    res = requests.get(URL, params={"instance": "1544803905", "locale": "iw_IL"})
+    with open(DATA_DIR / "segments.json", "wb") as f:
+        f.write(res.content)
+
+def get_segment_jsons():
     print("Fetching segments...")
     BASE_URL = "https://dist.meser-hadash.org.il/smart-dist/services/anonymous/polygon/id/android"
     sess = requests.Session()
@@ -36,3 +42,4 @@ def get_segments():
 if __name__ == "__main__":
     get_cities()
     get_segments()
+    get_segment_jsons()
