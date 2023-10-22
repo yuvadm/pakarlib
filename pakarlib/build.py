@@ -24,6 +24,7 @@ def get_segments():
         print(f"Fetching {locale}...")
         URL = "https://dist.meser-hadash.org.il/smart-dist/services/anonymous/segments/android"
         res = requests.get(URL, params={"instance": "1544803905", "locale": locale})
+        locale = locale.replace("iw", "he")
         with open(DATA_DIR / "segments" / f"{locale[:2]}.json", "wb") as f:
             f.write(res.content)
 
