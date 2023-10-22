@@ -17,6 +17,19 @@ def get_cities():
         with open(DATA_DIR / "cities"/ f"{lang}.json", "wb") as f:
             f.write(res.content)
 
+def get_districts():
+    print("Fetching districts...")
+    LANGS = ["he", "ar", "en", "ru"]
+    BASE_URL = "https://www.oref.org.il/Shared/Ajax/GetDistricts.aspx"
+    for lang in LANGS:
+        print(f"Fetching {lang}...")
+        res = requests.get(BASE_URL, params={"lang": lang})
+        if "Access Denied" in res.text:
+            print("Access denied, must run from Israeli IP")
+            break
+        with open(DATA_DIR / "districts"/ f"{lang}.json", "wb") as f:
+            f.write(res.content)
+
 def get_segments():
     print("Fetching segments...")
     LOCALES = ["iw_IL", "en_US", "ru_RU", "ar_EG"]
@@ -46,5 +59,6 @@ def get_polygons():
 
 if __name__ == "__main__":
     get_cities()
+    get_districts()
     get_segments()
     get_polygons()

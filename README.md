@@ -8,7 +8,6 @@ $ pipenv run build
 
 Currently supports:
 
-- Fetching cities metadata in 4 languages (he, ar, en, ru)
-- Fetching segments metadata
-- Fetching all polygons for all segments, published and unpublished
-- Generation of unified geojson data for later consumption
+- Fetching cities and districts metadata in 4 languages (he, ar, en, ru) from Pikud Ha'Oref unofficial ajax APIs
+- Fetching segments metadata all polygons for all segments from unofficial Android app APIs
+- Compilation of all unified data for later consumption (e.g. GeoJSON files)
