@@ -18,12 +18,16 @@ def get_cities():
             f.write(res.content)
 
 def get_segments():
-    URL = "https://dist.meser-hadash.org.il/smart-dist/services/anonymous/segments/android"
-    res = requests.get(URL, params={"instance": "1544803905", "locale": "iw_IL"})
-    with open(DATA_DIR / "segments.json", "wb") as f:
-        f.write(res.content)
+    print("Fetching segments...")
+    LOCALES = ["iw_IL", "en_US", "ru_RU", "ar_EG"]
+    for locale in LOCALES:
+        print(f"Fetching {locale}...")
+        URL = "https://dist.meser-hadash.org.il/smart-dist/services/anonymous/segments/android"
+        res = requests.get(URL, params={"instance": "1544803905", "locale": locale})
+        with open(DATA_DIR / "segments" / f"{locale[:2]}.json", "wb") as f:
+            f.write(res.content)
 
-def get_segment_jsons():
+def get_polygons():
     print("Fetching segments...")
     BASE_URL = "https://dist.meser-hadash.org.il/smart-dist/services/anonymous/polygon/id/android"
     sess = requests.Session()
@@ -34,7 +38,7 @@ def get_segment_jsons():
             print(res.text)
             print(f"{i} - got CDATA error, skipping")
         else:
-            with open(DATA_DIR / "segments" / f"{i}.json", "wb") as f:
+            with open(DATA_DIR / "polygons" / f"{i}.json", "wb") as f:
                 cont = res.content
                 print(f"{i} - writing {len(cont)} bytes")
                 f.write(cont)
@@ -42,4 +46,4 @@ def get_segment_jsons():
 if __name__ == "__main__":
     get_cities()
     get_segments()
-    get_segment_jsons()
+    get_polygons()
