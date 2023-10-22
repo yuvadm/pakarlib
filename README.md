@@ -1,8 +1,6 @@
 # Pakarlib
 
-Unified data for Pikud Ha'Oref
-
-Run the build with:
+Unified data for Pikud Ha'Oref. All data is versioned, but you can run the build to update all files:
 
 ```bash
 $ pipenv run build
