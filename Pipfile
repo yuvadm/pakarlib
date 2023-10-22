@@ -9,4 +9,5 @@ requests = "*"
 [dev-packages]
 
 [scripts]
+fetch = "python pakarlib/fetch.py"
 build = "python pakarlib/build.py"

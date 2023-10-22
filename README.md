@@ -6,6 +6,12 @@ Unified data for Pikud Ha'Oref. All data is versioned, but you can run the build
 $ pipenv run build
 ```
 
+Or fetch all files:
+
+```bash
+$ pipenv run fetch
+```
+
 Currently supports:
 
 - Fetching cities and districts metadata in 4 languages (he, ar, en, ru) from Pikud Ha'Oref unofficial ajax APIs
