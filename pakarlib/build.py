@@ -5,6 +5,7 @@ from pathlib import Path
 DATA_DIR = Path(__file__).parent / "data"
 
 def get_cities():
+    print("Fetching cities...")
     LANGS = ["he", "ar", "en", "ru"]
     BASE_URL = "https://www.oref.org.il/Shared/Ajax/GetCitiesMix.aspx"
     for lang in LANGS:
@@ -17,6 +18,7 @@ def get_cities():
             f.write(res.content)
 
 def get_segments():
+    print("Fetching segments...")
     BASE_URL = "https://dist.meser-hadash.org.il/smart-dist/services/anonymous/polygon/id/android"
     sess = requests.Session()
     
