@@ -11,15 +11,22 @@ def build_cities():
     LANG_FIELDS = ["label", "mixname", "rashut"]
 
     d = defaultdict(dict)
+    lds = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))  # defaultdicts all the way down!
 
     for lang in LANGS:
         with open(DATA_DIR / "cities"/ f"{lang}.json", "r") as f:
             cities = json.load(f)
             for city in cities:
+                val = city["value"]
                 for field in LANG_FIELDS:
-                    city[f"{field}_{lang}"] = city.pop(field)
-                d[city["value"]].update(city)
+                    lds[val][field][lang] = city.pop(field)
+                d[val].update(city)
     
+    # backfill all lang fields
+    for k, v in lds.items():
+        d[k].update(v)
+        d[k].pop("label_he")  # remove the default label_he
+
     with open(DATA_DIR / "build"/ "cities.json", "w") as f:
         f.write(json.dumps(list(d.values())))
 
