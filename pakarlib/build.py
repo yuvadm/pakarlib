@@ -90,7 +90,7 @@ def build_geojson():
                 # can save od here if we like
 
                 ft = od["features"][0]
-                ft["properties"]["type"] = "unified"
+                ft["properties"]["type"] = "listed"
                 res["features"].append(ft)
             except Exception:
                 pass
