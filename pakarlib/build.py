@@ -1,4 +1,5 @@
 import json
+import os
 
 from collections import defaultdict
 from pathlib import Path
@@ -55,6 +56,49 @@ def build_districts():
     with open(DATA_DIR / "build"/ "districts.json", "w") as f:
         f.write(json.dumps(list(d.values())))
 
+def build_geojson():
+    with open(DATA_DIR / "segments" / "he.json", "r") as f:
+        segments_he = json.load(f)["segments"]
+
+    with open(DATA_DIR / "segments" / "en.json", "r") as f:
+        segments_en = json.load(f)["segments"]
+
+    res = {"type": "FeatureCollection", "features": []}
+
+    for fn in os.listdir(DATA_DIR / "polygons"):
+        with open(DATA_DIR / "polygons" / fn, "r") as f:
+            j = json.load(f)
+            try:
+                sid = j["segmentId"]
+                pgs = [[[b,a] for a,b in j["polygonPointList"][0]]]
+                od = {
+                    "type": "FeatureCollection",
+                    "features": [{
+                        "type": "Feature",
+                        "properties": {
+                            "id": sid,
+                            "hebName": segments_he.get(sid, {}).get("name", ""),
+                            "engName": segments_en.get(sid, {}).get("name", ""),
+                            "seconds": int(segments_he.get(sid, {}).get("szSeconds", 0))
+                        },
+                        "geometry": {
+                            "type": "Polygon",
+                            "coordinates": pgs
+                        }
+                    }]
+                }
+                # can save od here if we like
+
+                ft = od["features"][0]
+                ft["properties"]["type"] = "unified"
+                res["features"].append(ft)
+            except Exception:
+                pass
+    
+    with open(DATA_DIR / "build" / "all.geojson", "w") as out:
+        json.dump(res, out)
+
 if __name__ == "__main__":
     build_cities()
     build_districts()
+    build_geojson()
