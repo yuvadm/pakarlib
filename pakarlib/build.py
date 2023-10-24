@@ -36,14 +36,21 @@ def build_districts():
     LANG_FIELDS = ["label", "areaname"]
 
     d = defaultdict(dict)
+    lds = defaultdict(lambda: defaultdict(lambda: defaultdict(dict)))  # defaultdicts all the way down!
 
     for lang in LANGS:
         with open(DATA_DIR / "districts"/ f"{lang}.json", "r") as f:
             districts = json.load(f)
             for district in districts:
+                val = district["value"]
                 for field in LANG_FIELDS:
-                    district[f"{field}_{lang}"] = district.pop(field)
-                d[district["value"]].update(district)
+                    lds[val][field][lang] = district.pop(field)
+                d[val].update(district)
+    
+    # backfill all lang fields
+    for k, v in lds.items():
+        d[k].update(v)
+        d[k].pop("label_he")  # remove the default label_he
     
     with open(DATA_DIR / "build"/ "districts.json", "w") as f:
         f.write(json.dumps(list(d.values())))
