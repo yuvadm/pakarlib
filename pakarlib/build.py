@@ -8,7 +8,7 @@ DATA_DIR = Path(__file__).parent / "data"
 def build_cities():
     print("Building cities...")
     LANGS = ["he", "ar", "en", "ru"]
-    LANG_FIELDS = ["label", "mixname"]
+    LANG_FIELDS = ["label", "mixname", "rashut"]
 
     d = defaultdict(dict)
 
