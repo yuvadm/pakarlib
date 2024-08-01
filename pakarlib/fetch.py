@@ -8,7 +8,7 @@ DATA_DIR = Path(__file__).parent / "data"
 def get_cities():
     print("Fetching cities...")
     LANGS = ["he", "ar", "en", "ru"]
-    BASE_URL = "https://www.oref.org.il/Shared/Ajax/GetCitiesMix.aspx"
+    BASE_URL = "https://alerts-history.oref.org.il/Shared/Ajax/GetCitiesMix.aspx"
     for lang in LANGS:
         print(f"Fetching {lang}...")
         res = requests.get(BASE_URL, params={"lang": lang})
@@ -22,7 +22,7 @@ def get_cities():
 def get_districts():
     print("Fetching districts...")
     LANGS = ["he", "ar", "en", "ru"]
-    BASE_URL = "https://www.oref.org.il/Shared/Ajax/GetDistricts.aspx"
+    BASE_URL = "https://alerts-history.oref.org.il/Shared/Ajax/GetDistricts.aspx"
     for lang in LANGS:
         print(f"Fetching {lang}...")
         res = requests.get(BASE_URL, params={"lang": lang})
