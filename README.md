@@ -1,15 +1,11 @@
 # Pakarlib
 
-Unified data for Pikud Ha'Oref. All data is versioned, but you can run the build to update all files:
+Unified data for Pikud Ha'Oref. All data is versioned, but you can run the build and fetch scripts to update all files:
 
 ```bash
-$ pipenv run build
-```
-
-Or fetch all files:
-
-```bash
-$ pipenv run fetch
+$ poetry install
+$ poetry run build
+$ poetry run fetch
 ```
 
 Currently supports:

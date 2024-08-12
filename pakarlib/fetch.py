@@ -65,7 +65,7 @@ def get_polygons():
                 f.write(cont)
 
 
-if __name__ == "__main__":
+def run():
     get_cities()
     get_districts()
     get_segments()

@@ -98,7 +98,7 @@ def build_geojson():
     with open(DATA_DIR / "build" / "all.geojson", "w") as out:
         json.dump(res, out)
 
-if __name__ == "__main__":
+def run():
     build_cities()
     build_districts()
     build_geojson()
