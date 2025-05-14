@@ -3,9 +3,9 @@
 Unified data for Pikud Ha'Oref. All data is versioned, but you can run the build and fetch scripts to update all files:
 
 ```bash
-$ poetry install
-$ poetry run build
-$ poetry run fetch
+$ uv sync
+$ uv run build
+$ uv run fetch
 ```
 
 Currently supports:
