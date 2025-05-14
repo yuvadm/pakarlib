@@ -56,9 +56,9 @@ def get_polygons():
         )
         if "CDATA" in res.text:
             print(f"{i} - got CDATA error, skipping")
-        if "Request unsuccessful" in res.text:
+        elif "Request unsuccessful" in res.text:
             print(f"{i} - got incapsula error, skipping")
-        if '"{}"' in res.text:
+        elif '"{}"' in res.text:
             print(f"{i} - got empty object, skipping")
         else:
             with open(DATA_DIR / "polygons" / f"{i}.json", "wb") as f:
