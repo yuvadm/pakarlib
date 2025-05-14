@@ -1,18 +1,17 @@
-[tool.poetry]
+[project]
 name = "pakarlib"
-version = "0.1.0"
-description = ""
-authors = ["Yuval Adam <_@yuv.al>"]
+version = "1.0.0"
+description = "Unified data for Pikud Ha'Oref"
 readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.32.3",
+]
 
-[tool.poetry.dependencies]
-python = "^3.8"
-requests = "^2.32.3"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.scripts]
+[project.scripts]
 build = "pakarlib.build:run"
 fetch = "pakarlib.fetch:run"
+
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
